@@ -15,16 +15,15 @@ class Login extends Component {
     handleChange(event) {
 
         this.setState({ value: event.target.value });
-        console.log('A name was submitted: ' + this.state.value);
 
     }
 
     handleSubmit(event) {
-        console.log('A name was submitted: ' + this.state.value);
+        const { dispatch } = this.props;
         const AUTHED_ID = this.state.value;
         console.log({ AUTHED_ID })
         if (AUTHED_ID !== '') {
-            this.props.setAuthedUser(AUTHED_ID)
+            dispatch(setAuthedUser(AUTHED_ID))
         }
         event.preventDefault();
     }
@@ -33,7 +32,7 @@ class Login extends Component {
         return (
             <Container>
 
-                <Form onSubmit={this.handleSubmit}>
+                <Form onSubmit={(e) => this.handleSubmit(e)}>
 
 
                     <Form.Group controlId="exampleForm.ControlSelect1" >
@@ -63,12 +62,12 @@ class Login extends Component {
     }
 }
 
-const mapDispatchToProps = (dispatch, ownProps) => {
-    return {
-        // dispatching plain actions
-        setAuthedUser: () => dispatch(setAuthedUser(ownProps.AUTHED_ID))
-    }
-}
+// const mapDispatchToProps = (dispatch, ownProps) => {
+//     return {
+//         // dispatching plain actions
+//         setAuthedUser: () => dispatch(setAuthedUser(ownProps.AUTHED_ID))
+//     }
+// }
 
 function mapStateToProps({ users }) {
     return {
@@ -76,4 +75,4 @@ function mapStateToProps({ users }) {
     }
 }
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Login));
+export default withRouter(connect(mapStateToProps)(Login));
