@@ -15,6 +15,7 @@ import Question from './components/Question';
 import AddQuestion from './components/AddQuestion';
 import Leaderboard from './components/Leaderboard';
 import { handleInitialData } from './actions/shared'
+import Header from './components/Header';
 
 class App extends Component {
   componentDidMount() {
@@ -24,6 +25,7 @@ class App extends Component {
     return (
       <Router>
         <div>
+          <Header />
           {/* <AuthButton />
 
         <ul>
