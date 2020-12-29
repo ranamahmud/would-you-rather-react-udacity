@@ -10,13 +10,20 @@ class Login extends Component {
         return (
             <Container>
                 <h1>Login</h1>
-                {
-                    users.length > 0 && users.map(user => {
-                        return (
-                            <p>{user.name}</p>
-                        )
-                    })
-                }
+                <select>
+                    {
+
+                        users && Object.keys(users).map((item, index) => {
+                            console.log({ item })
+                            return (
+                                <option value={users[item].name} key={index}>
+                                    {users[item].name}
+                                </option>
+                            )
+                        })
+                    }
+                </select>
+
             </Container>
         );
     }
