@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Button, Container, Form } from 'react-bootstrap';
 import { connect } from 'react-redux'
-import { withRouter } from 'react-router-dom';
+import { Redirect, withRouter } from 'react-router-dom';
 import { setAuthedUser } from '../actions/authedUser'
 
 class Login extends Component {
@@ -19,11 +19,12 @@ class Login extends Component {
     }
 
     handleSubmit(event) {
+        const { from } = this.props.location.state || { pathname: "/" };
         const { dispatch } = this.props;
         const AUTHED_ID = this.state.value;
-        console.log({ AUTHED_ID })
         if (AUTHED_ID !== '') {
-            dispatch(setAuthedUser(AUTHED_ID))
+            dispatch(setAuthedUser(AUTHED_ID));
+            this.props.history.push(from);
         }
         event.preventDefault();
     }
