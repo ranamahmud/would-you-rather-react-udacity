@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Button, Container, Form } from 'react-bootstrap';
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom';
+import { setAuthedUser } from '../actions/authedUser'
 
 class Login extends Component {
     constructor(props) {
@@ -20,6 +21,11 @@ class Login extends Component {
 
     handleSubmit(event) {
         console.log('A name was submitted: ' + this.state.value);
+        const AUTHED_ID = this.state.value;
+        console.log({ AUTHED_ID })
+        if (AUTHED_ID !== '') {
+            this.props.setAuthedUser(AUTHED_ID)
+        }
         event.preventDefault();
     }
     render() {
@@ -40,7 +46,7 @@ class Login extends Component {
                                 users && Object.keys(users).map((item, index) => {
 
                                     return (
-                                        <option value={users[item].name} key={users[item].id}>
+                                        <option value={users[item].id} key={users[item].id}>
                                             {users[item].name}
                                         </option>
                                     )
@@ -57,7 +63,12 @@ class Login extends Component {
     }
 }
 
-
+const mapDispatchToProps = (dispatch, ownProps) => {
+    return {
+        // dispatching plain actions
+        setAuthedUser: () => dispatch(setAuthedUser(ownProps.AUTHED_ID))
+    }
+}
 
 function mapStateToProps({ users }) {
     return {
@@ -65,4 +76,4 @@ function mapStateToProps({ users }) {
     }
 }
 
-export default withRouter(connect(mapStateToProps)(Login));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Login));
