@@ -3,9 +3,8 @@ import { receiveUsers } from '../actions/users'
 import { receiveQuestions } from '../actions/questions'
 import { setAuthedUser } from '../actions/authedUser'
 
-const AUTHED_ID = 'tylermcginnis'
 
-export function handleInitialData() {
+export function handleInitialData(AUTHED_ID) {
   return (dispatch) => {
     return getInitialData()
       .then(({ users, questions }) => {

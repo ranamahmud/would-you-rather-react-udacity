@@ -4,11 +4,7 @@ import { connect } from 'react-redux'
 import {
   BrowserRouter as Router,
   Switch,
-  Route,
-  Link,
-  Redirect,
-  useHistory,
-  useLocation
+  Route
 } from "react-router-dom";
 import Home from './components/Home';
 import Question from './components/Question';
@@ -16,50 +12,32 @@ import AddQuestion from './components/AddQuestion';
 import Leaderboard from './components/Leaderboard';
 import { handleInitialData } from './actions/shared'
 import Header from './components/Header';
+import Login from './components/Login';
+import PrivateRoute from './components/PrivateRoute';
 
 class App extends Component {
   componentDidMount() {
-    this.props.dispatch(handleInitialData())
+    const AUTHED_ID = null;
+    this.props.dispatch(handleInitialData(AUTHED_ID))
+
   }
   render() {
+    const { users } = this.props;
     return (
       <Router>
         <div>
           <Header />
-          {/* <AuthButton />
-
-        <ul>
-          <li>
-            <Link to="/public">Public Page</Link>
-          </li>
-          <li>
-            <Link to="/protected">Protected Page</Link>
-          </li>
-        </ul> */}
-
           <Switch>
-            <Route exact path="/">
-              <Home />
+            <PrivateRoute exact path="/" component={Home} />
+            <PrivateRoute path="questions/:question_id" component={Question} />
+
+            <PrivateRoute path="/add" component={AddQuestion} />
+            <Route path="/login">
+              <Login />
             </Route>
-            <Route path="questions/:question_id">
-              <Question />
-            </Route>
-            <Route path="/add">
-              <AddQuestion />
-            </Route>
-            <Route path="/leaderboard">
-              <Leaderboard />
-            </Route>
-            {/* <Route path="/public">
-            <PublicPage />
-          </Route>
-          <Route path="/login">
-            <LoginPage />
-          </Route>
-          <PrivateRoute path="/protected">
-            <ProtectedPage />
-          </PrivateRoute> */}
-          </Switch>
+            <PrivateRoute path="/leaderboard" component={Leaderboard} />
+            <Leaderboard />
+\          </Switch>
         </div>
       </Router>
     )
@@ -71,10 +49,13 @@ class App extends Component {
 // export default App;
 
 
-function mapStateToProps({ authedUser }) {
+function mapStateToProps({ authedUser, users, questions }) {
   return {
-    loading: authedUser === null
+    loading: authedUser === null,
+    users,
+    questions
   }
 }
 
 export default connect(mapStateToProps)(App)
+// export default connect()(App)
