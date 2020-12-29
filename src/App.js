@@ -1,4 +1,5 @@
 import './App.css';
+import { connect } from 'react-redux'
 import {
   BrowserRouter as Router,
   Switch,
@@ -55,4 +56,13 @@ function App() {
   );
 }
 
-export default App;
+// export default App;
+
+
+function mapStateToProps({ authedUser }) {
+  return {
+    loading: authedUser === null
+  }
+}
+
+export default connect(mapStateToProps)(App)
