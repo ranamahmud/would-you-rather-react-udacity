@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container } from 'react-bootstrap';
+import { Button, Container, Form } from 'react-bootstrap';
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom';
 
@@ -9,21 +9,30 @@ class Login extends Component {
         console.log(users);
         return (
             <Container>
-                <h1>Login</h1>
-                <select>
-                    {
 
-                        users && Object.keys(users).map((item, index) => {
-                            console.log({ item })
-                            return (
-                                <option value={users[item].name} key={users[item].id}>
-                                    {users[item].name}
-                                </option>
-                            )
-                        })
-                    }
-                </select>
+                <Form>
 
+
+                    <Form.Group controlId="exampleForm.ControlSelect1">
+                        <Form.Label>Login</Form.Label>
+                        <Form.Control as="select">
+                            {
+
+                                users && Object.keys(users).map((item, index) => {
+                                    console.log({ item })
+                                    return (
+                                        <option value={users[item].name} key={users[item].id}>
+                                            {users[item].name}
+                                        </option>
+                                    )
+                                })
+                            }
+                        </Form.Control>
+                    </Form.Group>
+                    <Button variant="primary" type="submit">
+                        Login
+  </Button>
+                </Form>
             </Container>
         );
     }
