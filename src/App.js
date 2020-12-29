@@ -9,6 +9,9 @@ import {
   useLocation
 } from "react-router-dom";
 import Home from './components/Home';
+import Question from './components/Question';
+import AddQuestion from './components/AddQuestion';
+import Leaderboard from './components/Leaderboard';
 function App() {
   return (
     <Router>
