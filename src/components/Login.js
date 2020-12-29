@@ -16,7 +16,7 @@ class Login extends Component {
                         users && Object.keys(users).map((item, index) => {
                             console.log({ item })
                             return (
-                                <option value={users[item].name} key={index}>
+                                <option value={users[item].name} key={users[item].id}>
                                     {users[item].name}
                                 </option>
                             )
