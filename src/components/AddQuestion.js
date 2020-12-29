@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container, Form, Row, Button } from 'react-bootstrap';
+import { Container, Form, Row, Button, Col } from 'react-bootstrap';
 
 
 // The form is available at / add.
@@ -14,26 +14,23 @@ class AddQuestion extends Component {
                 <h2>Would You Rather</h2>
 
                 <Row>
-                    <Form>
-                        <Form.Group controlId="formBasicEmail">
-                            <Form.Label>Email address</Form.Label>
-                            <Form.Control type="email" placeholder="Enter email" />
-                            <Form.Text className="text-muted">
-                                We'll never share your email with anyone else.
-    </Form.Text>
-                        </Form.Group>
+                    <Col>
+                        <Form>
+                            <Form.Group controlId="formBasicEmail">
+                                <Form.Label>Option 1</Form.Label>
+                                <Form.Control type="text" placeholder="Enter option 1" />
+                            </Form.Group>
 
-                        <Form.Group controlId="formBasicPassword">
-                            <Form.Label>Password</Form.Label>
-                            <Form.Control type="password" placeholder="Password" />
-                        </Form.Group>
-                        <Form.Group controlId="formBasicCheckbox">
-                            <Form.Check type="checkbox" label="Check me out" />
-                        </Form.Group>
-                        <Button variant="primary" type="submit">
-                            Submit
+                            <Form.Group controlId="formBasicPassword">
+                                <Form.Label>Option 2</Form.Label>
+                                <Form.Control type="text" placeholder="Enter option 2" />
+                            </Form.Group>
+
+                            <Button variant="primary" type="submit">
+                                Submit
   </Button>
-                    </Form>
+                        </Form>
+                    </Col>
                 </Row>
             </Container>
         );
