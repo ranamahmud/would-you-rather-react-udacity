@@ -1,4 +1,5 @@
 import './App.css';
+import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import {
   BrowserRouter as Router,
@@ -13,11 +14,17 @@ import Home from './components/Home';
 import Question from './components/Question';
 import AddQuestion from './components/AddQuestion';
 import Leaderboard from './components/Leaderboard';
-function App() {
-  return (
-    <Router>
-      <div>
-        {/* <AuthButton />
+import { handleInitialData } from './actions/shared'
+
+class App extends Component {
+  componentDidMount() {
+    this.props.dispatch(handleInitialData())
+  }
+  render() {
+    return (
+      <Router>
+        <div>
+          {/* <AuthButton />
 
         <ul>
           <li>
@@ -28,20 +35,20 @@ function App() {
           </li>
         </ul> */}
 
-        <Switch>
-          <Route exact path="/">
-            <Home />
-          </Route>
-          <Route path="questions/:question_id">
-            <Question />
-          </Route>
-          <Route path="/add">
-            <AddQuestion />
-          </Route>
-          <Route path="/leaderboard">
-            <Leaderboard />
-          </Route>
-          {/* <Route path="/public">
+          <Switch>
+            <Route exact path="/">
+              <Home />
+            </Route>
+            <Route path="questions/:question_id">
+              <Question />
+            </Route>
+            <Route path="/add">
+              <AddQuestion />
+            </Route>
+            <Route path="/leaderboard">
+              <Leaderboard />
+            </Route>
+            {/* <Route path="/public">
             <PublicPage />
           </Route>
           <Route path="/login">
@@ -50,11 +57,14 @@ function App() {
           <PrivateRoute path="/protected">
             <ProtectedPage />
           </PrivateRoute> */}
-        </Switch>
-      </div>
-    </Router>
-  );
+          </Switch>
+        </div>
+      </Router>
+    )
+
+  }
 }
+
 
 // export default App;
 
