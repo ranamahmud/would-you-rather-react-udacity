@@ -14,6 +14,7 @@ import { handleInitialData } from './actions/shared'
 import Header from './components/Header';
 import Login from './components/Login';
 import PrivateRoute from './components/PrivateRoute';
+import NotFound from './components/NotFound';
 
 class App extends Component {
   componentDidMount() {
@@ -36,6 +37,7 @@ class App extends Component {
               <Login />
             </Route>
             <PrivateRoute path="/leaderboard" component={Leaderboard} />
+            <Route component={NotFound} />
           </Switch>
         </div>
       </Router>
