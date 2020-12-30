@@ -3,11 +3,11 @@ import { Container } from 'react-bootstrap';
 
 class Question extends Component {
     render() {
-        const { question } = this.props;
+        const { question } = this.props.location.state;
         return (
             <Container>
                 <h1>Question</h1>
-                {/* <p>{question.id}</p> */}
+                <p>{question.id}</p>
             </Container>
         );
     }
