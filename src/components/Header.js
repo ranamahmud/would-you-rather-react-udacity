@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { Container, Nav, Navbar } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -16,12 +16,18 @@ const Header = (props) => {
                         <Link to="/" className="nav-link">Home</Link>
                         <Link to="/add" className="nav-link">Add Question</Link>
                         <Link to="/leaderboard" className="nav-link">Leaderboard</Link>
-                        <Nav.Link href="#" className="disabled">{authedUser && users[authedUser].name}</Nav.Link>
+
+                        {authedUser &&
+                            <Fragment>
+                                <Nav.Link className="nav-link disabled">{users[authedUser].name}</Nav.Link>
+                                <Link to="/logout" className="nav-link">Logout</Link>
+                            </Fragment>
+                        }
                     </Nav>
 
                 </Navbar.Collapse>
             </Navbar>
-        </Container>
+        </Container >
     );
 };
 
