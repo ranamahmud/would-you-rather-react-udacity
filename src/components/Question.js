@@ -16,7 +16,10 @@ class Question extends Component {
         const { question, answered } = this.props.location.state;
         const { users } = this.props;
         const avatarURL = users[question.author].avatarURL;
-
+        const vote1 = question.optionOne.votes.length;
+        const vote2 = question.optionTwo.votes.length;
+        const percent1 = vote1 / (vote1 + vote2) * 100;
+        const percent2 = vote2 / (vote1 + vote2) * 100;
         return (
             <Container>
 
@@ -41,11 +44,22 @@ class Question extends Component {
                                     <Fragment>
                                         <Card.Text>
                                             {question.optionOne.text}
-                                           Number of Votes: {question.optionOne.votes.length}
+                                        </Card.Text>
+                                        <Card.Text>
+                                            Number of Votes: {vote1}
+                                        </Card.Text>
+                                        <Card.Text>
+                                            Percentage of Votes: {percent1}%
                                         </Card.Text>
                                         <Card.Text>
                                             {question.optionTwo.text}
-                                            Number of Votes: {question.optionTwo.votes.length}
+
+                                        </Card.Text>
+                                        <Card.Text>
+                                            Number of Votes: {vote2}
+                                        </Card.Text>
+                                        <Card.Text>
+                                            Percentage of Votes: {percent2}%
                                         </Card.Text>
                                     </Fragment>
 
