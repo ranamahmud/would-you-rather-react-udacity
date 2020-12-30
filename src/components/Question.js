@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import { Button, Card, Col, Container } from 'react-bootstrap';
+import { Button, Card, Col, Container, Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
 
 // When a poll is clicked on the home page, the following is shown:
@@ -65,12 +65,24 @@ class Question extends Component {
 
                                 ) : (
                                         <Fragment>
-                                            <Card.Text>
-                                                {question.optionOne.text}
-                                            </Card.Text>
-                                            <Card.Text>
-                                                {question.optionTwo.text}
-                                            </Card.Text>
+                                            <Form>
+
+                                                <div key={`default-${'radio'}`} className="mb-3">
+                                                    <Form.Check
+                                                        type={'radio'}
+                                                        id={`default-${'radio'}`}
+                                                        label={question.optionOne.text}
+                                                    />
+
+                                                    <Form.Check
+
+                                                        type={'radio'}
+                                                        label={question.optionTwo.text}
+                                                        id={`disabled-default-${'radio'}`}
+                                                    />
+                                                </div>
+
+                                            </Form>
                                         </Fragment>
 
                                     )
