@@ -25,7 +25,7 @@ class Home extends Component {
     }
     render() {
         const { answered } = this.state;
-        const { authedUser, users, questions } = this.props;
+        const { authedUser, questions } = this.props;
         let answeredQuestions = Object.values(questions).filter(question =>
             question.optionOne.votes.indexOf(authedUser) > -1 ||
             question.optionTwo.votes.indexOf(authedUser) > -1
@@ -52,7 +52,7 @@ class Home extends Component {
 
                     {
                         answered === true ? (
-                            answeredQuestions.map(question => <QuestionDetail question={question} key={question.id} />)
+                            answeredQuestions.map(question => <QuestionDetail question={question} key={question.id} answered={answered} />)
                         ) : (
                                 unansweredQuestions.map(question => <QuestionDetail question={question} />)
 
@@ -65,10 +65,9 @@ class Home extends Component {
         );
     }
 }
-function mapStateToProps({ authedUser, users, questions }) {
+function mapStateToProps({ authedUser, questions }) {
     return {
         authedUser,
-        users,
         questions
     }
 }
