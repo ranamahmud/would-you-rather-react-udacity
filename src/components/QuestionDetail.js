@@ -1,16 +1,27 @@
 import React, { Component } from 'react';
 import { Card, Col, Button } from 'react-bootstrap';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 class QuestionDetail extends Component {
     render() {
-        const { question } = this.props;
+        const { question, users } = this.props;
+        const avatarURL = users[question.author].avatarURL;
         return (
 
 
             <Col md={4}>
                 <Card style={{ width: '18rem' }}>
-                    <Card.Img variant="top" src="holder.js/100px180" />
+                    <Card.Img variant="top" src={avatarURL} className="rounded-circle"
+                        style={{
+                            width: '50%',
+                            // height: "50%"
+                            marginLeft: "auto",
+                            marginRight: "auto",
+                            display: "block",
+                            marginTop: "15px"
+                        }}
+                    />
                     <Card.Body>
                         <Card.Title>Would you rather</Card.Title>
                         <Card.Text>
@@ -39,4 +50,10 @@ class QuestionDetail extends Component {
     }
 }
 
-export default QuestionDetail;
+function mapStateToProps({ users }) {
+    return {
+
+        users
+    }
+}
+export default connect(mapStateToProps)(QuestionDetail);
