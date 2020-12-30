@@ -4,14 +4,15 @@ import { connect } from 'react-redux';
 import { Router, Switch } from 'react-router-dom';
 import Header from './Header';
 import PrivateRoute from './PrivateRoute';
+import QuestionDetail from './QuestionDetail';
 
 
-// The answered and unanswered polls are both available at the root.
-// The user can alternate between viewing answered and unanswered polls.
-// The unanswered questions are shown by default.
-// The name of the logged in user is visible on the page.
-// The user can navigate to the leaderboard.
-// The user can navigate to the form that allows the user to create a new poll.
+//* The answered and unanswered polls are both available at the root.
+//* The user can alternate between viewing answered and unanswered polls.
+//* The unanswered questions are shown by default.
+//* The name of the logged in user is visible on the page.
+//* The user can navigate to the leaderboard.
+//* The user can navigate to the form that allows the user to create a new poll.
 class Home extends Component {
     constructor(props) {
         super(props);
@@ -44,9 +45,9 @@ class Home extends Component {
                 <Row>
                     {
                         answered === true ? (
-                            answeredQuestions.map(question => <li>{question.id}</li>)
+                            answeredQuestions.map(question => <QuestionDetail question={question} />)
                         ) : (
-                                unansweredQuestions.map(question => <li>{question.id}</li>)
+                                unansweredQuestions.map(question => <QuestionDetail question={question} />)
 
                             )
 
