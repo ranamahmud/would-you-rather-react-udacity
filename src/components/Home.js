@@ -43,7 +43,12 @@ class Home extends Component {
                 </Row>
                 <Row>
                     {
-                        answered === true ? <p>{answeredQuestions.length}</p> : <p>{unansweredQuestions.length}</p>
+                        answered === true ? (
+                            answeredQuestions.map(question => <li>{question.id}</li>)
+                        ) : (
+                                unansweredQuestions.map(question => <li>{question.id}</li>)
+
+                            )
 
                     }
                 </Row>
