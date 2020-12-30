@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
-import { Container } from 'react-bootstrap';
+import { Button, Container, Row } from 'react-bootstrap';
 import { connect } from 'react-redux';
+import { Router, Switch } from 'react-router-dom';
 import Header from './Header';
+import PrivateRoute from './PrivateRoute';
 
 
 // The answered and unanswered polls are both available at the root.
@@ -13,18 +15,33 @@ import Header from './Header';
 class Home extends Component {
 
     render() {
-        const { users } = this.props;
+        const { authedUser, users, questions } = this.props;
+
+        const userQuestions = Object.values(questions).filter(question =>
+            question.optionOne.votes.indexOf(authedUser) > -1 ||
+            question.optionTwo.votes.indexOf(authedUser) > -1
+        )
         return (
             <Container>
                 <h1>Home</h1>
-            </Container>
+                <Row>
+                    <Button>Answered</Button>
+                    <Button>Unanswered</Button>
+                </Row>
+                <Row>
+
+                </Row>
+
+                <p>{userQuestions.length}</p>
+            </Container >
         );
     }
 }
-function mapStateToProps({ authedUser, users }) {
+function mapStateToProps({ authedUser, users, questions }) {
     return {
         authedUser,
-        users
+        users,
+        questions
     }
 }
 export default connect(mapStateToProps)(Home);

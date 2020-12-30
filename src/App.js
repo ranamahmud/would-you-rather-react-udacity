@@ -36,8 +36,7 @@ class App extends Component {
               <Login />
             </Route>
             <PrivateRoute path="/leaderboard" component={Leaderboard} />
-            <Leaderboard />
-\          </Switch>
+          </Switch>
         </div>
       </Router>
     )
