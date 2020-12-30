@@ -3,9 +3,11 @@ import { Container } from 'react-bootstrap';
 
 class Question extends Component {
     render() {
+        const { question } = this.props;
         return (
             <Container>
                 <h1>Question</h1>
+                {/* <p>{question.id}</p> */}
             </Container>
         );
     }

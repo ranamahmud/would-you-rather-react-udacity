@@ -14,13 +14,24 @@ class QuestionDetail extends Component {
                     <Card.Body>
                         <Card.Title>Would you rather</Card.Title>
                         <Card.Text>
-                            <p>{question.optionOne.text}</p>
-                            <p>{question.optionTwo.text}</p>
-                            <p>{question.author}</p>
+                            {question.optionOne.text}
                         </Card.Text>
-                        <Link to={`questions/${question.id}`}>
+                        <Card.Text>
+                            {question.optionTwo.text}
+                        </Card.Text>
+                        <Card.Text>
+                            {question.author}
+                        </Card.Text>
+
+                        <Link to={{
+                            pathname: "/questions/" + question.id,
+                            state: {
+                                question: question
+                            }
+                        }} >
                             <Button variant="primary">View Poll</Button>
                         </Link>
+
                     </Card.Body>
                 </Card>
             </Col >

@@ -44,7 +44,7 @@ class Home extends Component {
                 <Row>
                     {
                         answered === true ? (
-                            answeredQuestions.map(question => <QuestionDetail question={question} />)
+                            answeredQuestions.map(question => <QuestionDetail question={question} key={question.id} />)
                         ) : (
                                 unansweredQuestions.map(question => <QuestionDetail question={question} />)
 
