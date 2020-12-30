@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { Button, Card, Col, Container, Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
+import { saveQuestionAnswer } from '../actions/authedUser'
 
 // When a poll is clicked on the home page, the following is shown:
 // the text “Would You Rather”;
@@ -15,7 +16,7 @@ class Question extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            selectedOption: null
+            answer: null
         };
 
         this.handleOptionChange = this.handleOptionChange.bind(this);
@@ -23,15 +24,18 @@ class Question extends Component {
     }
     handleOptionChange = changeEvent => {
         this.setState({
-            selectedOption: changeEvent.target.value
+            answer: changeEvent.target.value
         });
     };
 
     handleSubmit = event => {
+        // { authedUser, qid, answer }
+        const { answer } = this.state.answer;
+
         console.log("button clicked");
         event.preventDefault();
 
-        console.log("You have submitted:", this.state.selectedOption);
+        console.log("You have submitted:", this.state.answer);
     };
 
     render() {
@@ -91,13 +95,13 @@ class Question extends Component {
                                 ) : (
                                         <Fragment>
                                             <Form onSubmit={this.handleSubmit}>
-                                                <div class="custom-control custom-radio">
-                                                    <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input" onChange={this.handleOptionChange} value={question.optionOne.text} />
-                                                    <label class="custom-control-label" for="customRadio1">{question.optionOne.text}</label>
+                                                <div className="custom-control custom-radio">
+                                                    <input type="radio" id="customRadio1" name="customRadio" className="custom-control-input" onChange={this.handleOptionChange} value={question.optionOne.text} />
+                                                    <label className="custom-control-label" for="customRadio1">{question.optionOne.text}</label>
                                                 </div>
-                                                <div class="custom-control custom-radio">
-                                                    <input type="radio" id="customRadio2" name="customRadio" class="custom-control-input" onChange={this.handleOptionChange} value={question.optionTwo.text} />
-                                                    <label class="custom-control-label" for="customRadio2">{question.optionTwo.text}</label>
+                                                <div className="custom-control custom-radio">
+                                                    <input type="radio" id="customRadio2" name="customRadio" className="custom-control-input" onChange={this.handleOptionChange} value={question.optionTwo.text} />
+                                                    <label className="custom-control-label" for="customRadio2">{question.optionTwo.text}</label>
                                                 </div>
 
                                                 <Button variant="primary" type="submit">Submit</Button>

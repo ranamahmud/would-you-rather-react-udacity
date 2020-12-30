@@ -40,8 +40,9 @@ class Home extends Component {
         return (
             <Container>
                 <Row>
-                    <Button onClick={this.handleSwitch}>Answered</Button>
                     <Button onClick={this.handleSwitch}>Unanswered</Button>
+                    <Button onClick={this.handleSwitch}>Answered</Button>
+
                 </Row>
                 <Row>
                     <Col>
@@ -54,7 +55,7 @@ class Home extends Component {
                         answered === true ? (
                             answeredQuestions.map(question => <QuestionDetail question={question} key={question.id} answered={answered} />)
                         ) : (
-                                unansweredQuestions.map(question => <QuestionDetail question={question} answered={answered} />)
+                                unansweredQuestions.map(question => <QuestionDetail question={question} key={question.id} answered={answered} />)
 
                             )
 
