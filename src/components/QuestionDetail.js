@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 class QuestionDetail extends Component {
     render() {
-        const { question, users } = this.props;
+        const { question, users, answered } = this.props;
         const avatarURL = users[question.author].avatarURL;
         return (
 
@@ -39,7 +39,8 @@ class QuestionDetail extends Component {
                         <Link to={{
                             pathname: "/questions/" + question.id,
                             state: {
-                                question: question
+                                question: question,
+                                answered: answered
                             }
                         }} >
                             <Button variant="primary">View Poll</Button>

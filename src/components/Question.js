@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { Button, Card, Col, Container } from 'react-bootstrap';
 import { connect } from 'react-redux';
 
@@ -13,7 +13,7 @@ import { connect } from 'react-redux';
 
 class Question extends Component {
     render() {
-        const { question } = this.props.location.state;
+        const { question, answered } = this.props.location.state;
         const { users } = this.props;
         const avatarURL = users[question.author].avatarURL;
 
@@ -36,12 +36,31 @@ class Question extends Component {
                         />
                         <Card.Body>
                             <Card.Title>Would you rather</Card.Title>
-                            <Card.Text>
-                                {question.optionOne.text}
-                            </Card.Text>
-                            <Card.Text>
-                                {question.optionTwo.text}
-                            </Card.Text>
+                            {
+                                answered === true ? (
+                                    <Fragment>
+                                        <Card.Text>
+                                            {question.optionOne.text}
+                                           Number of Votes: {question.optionOne.votes.length}
+                                        </Card.Text>
+                                        <Card.Text>
+                                            {question.optionTwo.text}
+                                            Number of Votes: {question.optionTwo.votes.length}
+                                        </Card.Text>
+                                    </Fragment>
+
+                                ) : (
+                                        <Fragment>
+                                            <Card.Text>
+                                                {question.optionOne.text}
+                                            </Card.Text>
+                                            <Card.Text>
+                                                {question.optionTwo.text}
+                                            </Card.Text>
+                                        </Fragment>
+
+                                    )
+                            }
                             <Card.Text>
                                 {question.author}
                             </Card.Text>
@@ -52,7 +71,7 @@ class Question extends Component {
                     </Card>
                 </Col >
 
-            </Container>
+            </Container >
         );
     }
 }
