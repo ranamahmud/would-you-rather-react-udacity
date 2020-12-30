@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Container } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import LeaderBoardCard from './LeaderBoardCard';
+import UserBoard from './UserBoard';
 
 
 // The Leaderboard is available at / leaderboard.
@@ -16,15 +17,19 @@ class Leaderboard extends Component {
         const { users } = this.props;
         for (const id of Object.keys(users)) {
             const user = users[id];
-            // console.log(user)
             users[id].score = Object.keys(user.answers).length + user.questions.length;
-            // console.log({ user });
-            console.log(users[id]);
+
         }
+        const usersSorted = Object.values(users).sort((a, b) => b.score - a.score);
+        console.log({ usersSorted })
+        // 
         return (
             <Container className="text-center">
                 <h1>Leaderboard</h1>
-                <LeaderBoardCard />
+                {
+                    usersSorted.map(user => <UserBoard user={user} />)
+                }
+                {/* <LeaderBoardCard /> */}
             </Container>
         );
     }
