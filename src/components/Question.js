@@ -1,8 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { Button, Card, Col, Container, Form } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import { saveQuestionAnswer } from '../actions/authedUser'
-
+import { handleAddAnswer } from '../actions/questions'
 // When a poll is clicked on the home page, the following is shown:
 // the text “Would You Rather”;
 // the picture of the user who posted the polling question; and
@@ -16,31 +15,41 @@ class Question extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            answer: null
+            answer: ''
         };
 
         this.handleOptionChange = this.handleOptionChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
     handleOptionChange = changeEvent => {
+        console.log(changeEvent.target.value);
         this.setState({
             answer: changeEvent.target.value
         });
+        // console.log(this.state.answer)
     };
 
-    handleSubmit = event => {
-        // { authedUser, qid, answer }
-        const { answer } = this.state.answer;
-
-        console.log("button clicked");
+    handleSubmit = (event, authedUser, answer, qid) => {
         event.preventDefault();
 
-        console.log("You have submitted:", this.state.answer);
+        const { dispatch } = this.props;
+        const answerInfo = {
+            authedUser,
+            qid,
+            answer
+
+        }
+        dispatch(handleAddAnswer(answerInfo))
+        // return dispatch(saveQuestionAnswer(result));
+
     };
 
     render() {
         const { question, answered } = this.props.location.state;
         const { users } = this.props;
+        const { answer } = this.state;
+        const { authedUser } = this.props;
+
         const avatarURL = users[question.author].avatarURL;
         const vote1 = question.optionOne.votes.length;
         const vote2 = question.optionTwo.votes.length;
@@ -94,14 +103,14 @@ class Question extends Component {
 
                                 ) : (
                                         <Fragment>
-                                            <Form onSubmit={this.handleSubmit}>
+                                            <Form onSubmit={(event) => this.handleSubmit(event, authedUser, answer, question.id)}>
                                                 <div className="custom-control custom-radio">
                                                     <input type="radio" id="customRadio1" name="customRadio" className="custom-control-input" onChange={this.handleOptionChange} value={question.optionOne.text} />
-                                                    <label className="custom-control-label" for="customRadio1">{question.optionOne.text}</label>
+                                                    <label className="custom-control-label" htmlFor="customRadio1">{question.optionOne.text}</label>
                                                 </div>
                                                 <div className="custom-control custom-radio">
                                                     <input type="radio" id="customRadio2" name="customRadio" className="custom-control-input" onChange={this.handleOptionChange} value={question.optionTwo.text} />
-                                                    <label className="custom-control-label" for="customRadio2">{question.optionTwo.text}</label>
+                                                    <label className="custom-control-label" htmlFor="customRadio2">{question.optionTwo.text}</label>
                                                 </div>
 
                                                 <Button variant="primary" type="submit">Submit</Button>
@@ -124,10 +133,12 @@ class Question extends Component {
     }
 }
 
-function mapStateToProps({ users }) {
+function mapStateToProps({ users, authedUser }) {
     return {
 
-        users
+        users,
+        authedUser
+
     }
 }
 export default connect(mapStateToProps)(Question);
