@@ -3,6 +3,7 @@ import { saveQuestionAnswer } from '../utils/api';
 
 export const RECEIVE_QUESTIONS = 'RECEIVE_QUESTIONS'
 export const ADD_ANSWER = 'ADD_ANSWER'
+export const ADD_QUESTION = 'ADD_QUESTION'
 export function receiveQuestions(questions) {
     return {
         type: RECEIVE_QUESTIONS,
@@ -10,13 +11,13 @@ export function receiveQuestions(questions) {
     }
 }
 
-export function addQuestion(info) {
-    return dispatch => {
-        return dispatch(saveQuestion(info))
-            .then(question => console.log('success'))
-            .catch(err => console.log(err))
-    }
-}
+// export function addQuestion(info) {
+//     return dispatch => {
+//         return dispatch(saveQuestion(info))
+//             .then(question => console.log('success'))
+//             .catch(err => console.log(err))
+//     }
+// }
 
 
 // export function addAnswer(info) {
@@ -37,7 +38,7 @@ function addAnswer(answerInfo) {
 }
 
 export function handleAddAnswer(answerInfo) {
-    return (dispatch, getState) => {
+    return (dispatch) => {
         // const { authedUser } = getState()
         // dispatch(showLoading())
 
@@ -45,5 +46,30 @@ export function handleAddAnswer(answerInfo) {
             .then((answerInfo) => dispatch(addAnswer(answerInfo)))
             // .then(() => dispatch(hideLoading()))
             .catch(err => console.log(err))
+    }
+}
+
+// new question action
+
+
+function addQuestion(infoQuestion) {
+    return {
+        type: ADD_QUESTION,
+        infoQuestion,
+    }
+}
+
+export function handleAddQuestion(text, replyingTo) {
+    return (dispatch, getState) => {
+        const { authedUser } = getState()
+        // dispatch(showLoading())
+
+        return saveQuestion({
+            text,
+            author: authedUser,
+            replyingTo
+        })
+            .then((tweet) => dispatch(addQuestion(tweet)))
+        // .then(() => dispatch(hideLoading()))
     }
 }
