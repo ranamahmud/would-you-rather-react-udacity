@@ -27,7 +27,7 @@ class Leaderboard extends Component {
             <Container className="text-center">
                 <h1>Leaderboard</h1>
                 {
-                    usersSorted.map(user => <UserBoard user={user} />)
+                    usersSorted.map(user => <UserBoard user={user} key={user.id} />)
                 }
                 {/* <LeaderBoardCard /> */}
             </Container>

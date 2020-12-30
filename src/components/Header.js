@@ -1,12 +1,18 @@
 import React, { Fragment } from 'react';
 import { Container, Nav, Navbar } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
+import { setAuthedUser } from '../actions/authedUser'
 
 const Header = (props) => {
 
     const { users, authedUser } = props;
+    const logout = () => {
+        const AUTHED_ID = null;
+        props.dispatch(setAuthedUser(AUTHED_ID));
+        props.history.push("/login");
 
+    }
     return (
         <Container>
             <Navbar bg="light" expand="lg">
@@ -20,7 +26,7 @@ const Header = (props) => {
                         {authedUser &&
                             <Fragment>
                                 <Nav.Link className="nav-link disabled">{users[authedUser].name}</Nav.Link>
-                                <Link to="/logout" className="nav-link">Logout</Link>
+                                <Nav.Link className="nav-link"><button onClick={logout}>Logout</button></Nav.Link>
                             </Fragment>
                         }
                     </Nav>
@@ -37,4 +43,4 @@ function mapStateToProps({ authedUser, users }) {
         users
     }
 }
-export default connect(mapStateToProps)(Header);
+export default withRouter(connect(mapStateToProps)(Header));
