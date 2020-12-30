@@ -9,7 +9,16 @@ export default class UserBoard extends Component {
             <Container>
                 <Col className="d-flex justify-content-center">
                     <Card style={{ width: '18rem' }}>
-                        <Card.Img variant="top" src="holder.js/100px180" />
+                        <Card.Img variant="top" src={user.avatarURL} className="rounded-circle"
+                            style={{
+                                width: '50%',
+                                // height: "50%"
+                                marginLeft: "auto",
+                                marginRight: "auto",
+                                display: "block",
+                                marginTop: "15px"
+                            }}
+                        />
                         <Card.Body>
                             <Card.Title>{user.name}</Card.Title>
                             <Card.Text>
@@ -19,7 +28,7 @@ export default class UserBoard extends Component {
                                 Questions created: {user.questions.length}
                             </Card.Text>
                             <Card.Text>
-                                {user.score}
+                                Score:   {user.score}
                             </Card.Text>
                         </Card.Body>
                     </Card>
