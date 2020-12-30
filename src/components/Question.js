@@ -12,6 +12,28 @@ import { connect } from 'react-redux';
 //     the percentage of people who voted for that option.
 
 class Question extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            selectedOption: null
+        };
+
+        this.handleOptionChange = this.handleOptionChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+    }
+    handleOptionChange = changeEvent => {
+        this.setState({
+            selectedOption: changeEvent.target.value
+        });
+    };
+
+    handleSubmit = event => {
+        console.log("button clicked");
+        event.preventDefault();
+
+        console.log("You have submitted:", this.state.selectedOption);
+    };
+
     render() {
         const { question, answered } = this.props.location.state;
         const { users } = this.props;
@@ -39,6 +61,9 @@ class Question extends Component {
                         />
                         <Card.Body>
                             <Card.Title>Would you rather</Card.Title>
+                            <Card.Text>
+                                Created by: {question.author}
+                            </Card.Text>
                             {
                                 answered === true ? (
                                     <Fragment>
@@ -65,33 +90,26 @@ class Question extends Component {
 
                                 ) : (
                                         <Fragment>
-                                            <Form>
-
-                                                <div key={`default-${'radio'}`} className="mb-3">
-                                                    <Form.Check
-                                                        type={'radio'}
-                                                        id={`default-${'radio'}`}
-                                                        label={question.optionOne.text}
-                                                    />
-
-                                                    <Form.Check
-
-                                                        type={'radio'}
-                                                        label={question.optionTwo.text}
-                                                        id={`disabled-default-${'radio'}`}
-                                                    />
+                                            <Form onSubmit={this.handleSubmit}>
+                                                <div class="custom-control custom-radio">
+                                                    <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input" onChange={this.handleOptionChange} value={question.optionOne.text} />
+                                                    <label class="custom-control-label" for="customRadio1">{question.optionOne.text}</label>
                                                 </div>
+                                                <div class="custom-control custom-radio">
+                                                    <input type="radio" id="customRadio2" name="customRadio" class="custom-control-input" onChange={this.handleOptionChange} value={question.optionTwo.text} />
+                                                    <label class="custom-control-label" for="customRadio2">{question.optionTwo.text}</label>
+                                                </div>
+
+                                                <Button variant="primary" type="submit">Submit</Button>
+
 
                                             </Form>
                                         </Fragment>
 
                                     )
                             }
-                            <Card.Text>
-                                {question.author}
-                            </Card.Text>
 
-                            <Button variant="primary">View Poll</Button>
+
 
                         </Card.Body>
                     </Card>
