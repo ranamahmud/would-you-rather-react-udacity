@@ -37,7 +37,6 @@ class Home extends Component {
         )
         return (
             <Container>
-                <h1>Home</h1>
                 <Row>
                     <Button onClick={this.handleSwitch}>Answered</Button>
                     <Button onClick={this.handleSwitch}>Unanswered</Button>

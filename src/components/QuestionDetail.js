@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Card, Col, Button } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
 class QuestionDetail extends Component {
     render() {
@@ -17,10 +18,12 @@ class QuestionDetail extends Component {
                             <p>{question.optionTwo.text}</p>
                             <p>{question.author}</p>
                         </Card.Text>
-                        <Button variant="primary">View Details</Button>
+                        <Link to={`questions/${question.id}`}>
+                            <Button variant="primary">View Poll</Button>
+                        </Link>
                     </Card.Body>
                 </Card>
-            </Col>
+            </Col >
         );
     }
 }
