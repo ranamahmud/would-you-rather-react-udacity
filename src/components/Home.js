@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Container, Row } from 'react-bootstrap';
+import { Button, Col, Container, Row } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { Router, Switch } from 'react-router-dom';
 import Header from './Header';
@@ -26,15 +26,17 @@ class Home extends Component {
     render() {
         const { answered } = this.state;
         const { authedUser, users, questions } = this.props;
-
-        const answeredQuestions = Object.values(questions).filter(question =>
+        let answeredQuestions = Object.values(questions).filter(question =>
             question.optionOne.votes.indexOf(authedUser) > -1 ||
             question.optionTwo.votes.indexOf(authedUser) > -1
         )
-        const unansweredQuestions = Object.values(questions).filter(question =>
+        let unansweredQuestions = Object.values(questions).filter(question =>
             !(question.optionOne.votes.indexOf(authedUser) > -1 ||
                 question.optionTwo.votes.indexOf(authedUser) > -1)
         )
+        answeredQuestions = answeredQuestions.sort((a, b) => b.timestamp - a.timestamp)
+
+        unansweredQuestions = unansweredQuestions.sort((a, b) => b.timestamp - a.timestamp)
         return (
             <Container>
                 <Row>
@@ -42,6 +44,12 @@ class Home extends Component {
                     <Button onClick={this.handleSwitch}>Unanswered</Button>
                 </Row>
                 <Row>
+                    <Col>
+                        <h1>{answered === true ? "Answered" : "Not Answered"}</h1>
+                    </Col>
+                </Row>
+                <Row>
+
                     {
                         answered === true ? (
                             answeredQuestions.map(question => <QuestionDetail question={question} key={question.id} />)

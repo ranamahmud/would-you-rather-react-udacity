@@ -11,7 +11,9 @@ class QuestionDetail extends Component {
 
 
             <Col md={4}>
-                <Card style={{ width: '18rem' }}>
+                <Card style={{ width: '18rem' }}
+                    style={{ marginBottom: "15px" }}
+                >
                     <Card.Img variant="top" src={avatarURL} className="rounded-circle"
                         style={{
                             width: '50%',
