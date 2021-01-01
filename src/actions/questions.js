@@ -53,23 +53,20 @@ export function handleAddAnswer(answerInfo) {
 
 
 function addQuestion(infoQuestion) {
+    console.log('ADD_QUESTION addQuestion')
     return {
         type: ADD_QUESTION,
         infoQuestion,
     }
 }
 
-export function handleAddQuestion(text, replyingTo) {
+export function handleAddQuestion(question) {
     return (dispatch, getState) => {
-        const { authedUser } = getState()
         // dispatch(showLoading())
 
-        return saveQuestion({
-            text,
-            author: authedUser,
-            replyingTo
-        })
-            .then((tweet) => dispatch(addQuestion(tweet)))
+        return saveQuestion(question)
+            .then((question) => dispatch(addQuestion(question)))
+            .catch((error) => console.log({ error }))
         // .then(() => dispatch(hideLoading()))
     }
 }

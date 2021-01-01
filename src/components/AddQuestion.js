@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Container, Form, Row, Button, Col } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import { handleAddQuestion } from '../actions/questions';
 import { saveQuestion } from '../utils/api';
 
 // The form is available at / add.
@@ -11,43 +12,51 @@ import { saveQuestion } from '../utils/api';
 class AddQuestion extends Component {
     constructor(props) {
         super(props);
-        this.state = { question: {} };
+        this.state = {
+            optionOneText: '',
+            optionTwoText: ''
+        };
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
     handleChange(event) {
-        console.log(event.target.value);
-        const question = {};
-        question[event.target.id] = event.target.value;
         // console.log(event.target.id);
         this.setState({
-            question: question
+            [event.target.id]: event.target.value
         });
+        console.log(this.state);
 
 
     }
 
-    handleSubmit(event, author) {
+    handleSubmit(event) {
         event.preventDefault();
-
+        const { authedUser } = this.props;
+        const author = authedUser;
+        console.log({ author })
         console.log("button clicked");
         const { from } = this.props.location.state || { pathname: "/" };
         const { dispatch } = this.props;
-        const question = this.state.question;
-        if (question !== null) {
+        const optionOneText = this.state.optionOneText;
+        const optionTwoText = this.state.optionTwoText;
+        if (optionOneText !== '' && optionTwoText !== ''
+            && author !== undefined
+        ) {
             console.log("inside");
-            console.log({ question });
-            dispatch(saveQuestion({ author, ...question }));
+            console.log({ optionOneText, optionTwoText, author })
+            // dispatch(saveQuestion({ optionOneText, optionTwoText, author }));
+            dispatch(handleAddQuestion({ optionOneText, optionTwoText, author }));
             // saveQuestion(question)
             // this.props.history.push(from);
         }
 
-        this.setState({ question: {} })
+        this.setState({
+            optionOneText: '',
+            optionTwoText: ''
+        })
     }
     render() {
-        const { authedUser } = this.props;
-
         return (
             <Container className="text-center">
                 <h1>Add Question</h1>
@@ -55,7 +64,7 @@ class AddQuestion extends Component {
 
                 <Row>
                     <Col>
-                        <Form onSubmit={(e, authedUser) => this.handleSubmit(e, authedUser)}>
+                        <Form onSubmit={(e) => this.handleSubmit(e)}>
                             <Form.Group controlId="optionOneText">
                                 <Form.Label>Option 1</Form.Label>
                                 <Form.Control type="text" placeholder="Enter option 1" onChange={this.handleChange} />
