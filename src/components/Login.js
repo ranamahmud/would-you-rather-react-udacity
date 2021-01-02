@@ -19,8 +19,7 @@ class Login extends Component {
     }
 
     handleSubmit(event) {
-        console.log(this.props.location.state);
-        // const { from } = this.props.location.state === undefined ? { pathname: "/" } : this.props.location.state;
+        event.preventDefault();
         const { dispatch } = this.props;
         const AUTHED_ID = this.state.value;
         console.log({ AUTHED_ID })
@@ -28,7 +27,6 @@ class Login extends Component {
             dispatch(setAuthedUser(AUTHED_ID));
             this.props.history.push("/");
         }
-        event.preventDefault();
     }
     render() {
         const { users } = this.props;
