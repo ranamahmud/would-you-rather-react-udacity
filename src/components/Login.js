@@ -19,12 +19,14 @@ class Login extends Component {
     }
 
     handleSubmit(event) {
-        const { from } = this.props.location.state || { pathname: "/" };
+        console.log(this.props.location.state);
+        // const { from } = this.props.location.state === undefined ? { pathname: "/" } : this.props.location.state;
         const { dispatch } = this.props;
         const AUTHED_ID = this.state.value;
+        console.log({ AUTHED_ID })
         if (AUTHED_ID !== '') {
             dispatch(setAuthedUser(AUTHED_ID));
-            this.props.history.push(from);
+            this.props.history.push("/");
         }
         event.preventDefault();
     }

@@ -33,13 +33,6 @@ class Question extends Component {
         event.preventDefault();
 
         const { dispatch } = this.props;
-        const answerInfo = {
-            authedUser,
-            qid,
-            answer
-
-        }
-        console.log({ answerInfo });
         dispatch(handleAddAnswer({
             authedUser,
             qid,
@@ -47,7 +40,10 @@ class Question extends Component {
 
         }))
         // return dispatch(saveQuestionAnswer(result));
-
+        this.setState({
+            answer: ''
+        })
+        this.props.history.push("/")
     };
 
     render() {
