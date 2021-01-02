@@ -27,22 +27,19 @@ export default function questions(state = {}, action) {
       }
     case ADD_ANSWER:
       const { answerInfo } = action
-
-      let replyingTo = {}
-      if (answerInfo.replyingTo !== null) {
-        replyingTo = {
-          [answerInfo.replyingTo]: {
-            ...state[answerInfo.replyingTo],
-            replies: state[answerInfo.replyingTo].replies.concat([answerInfo.id])
-          }
-        }
-      }
-
+      console.log(action)
       return {
         ...state,
-        ...replyingTo,
-        [action.answer.id]: action.answer,
+        [action.answerInfo.qid]: {
+          ...state[answerInfo.qid],
+          [action.answer]: {
+            ...state[answerInfo.qid][action.answer],
+            votes: state[action.answerInfo.qid][action.answerInfo.answer].votes.concat([action.answerInfo.authedUser])
+          }
+          // optionTwo: ans
+        },
       }
+
     default:
       return state
   }

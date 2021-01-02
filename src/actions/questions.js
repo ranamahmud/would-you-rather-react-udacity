@@ -11,26 +11,10 @@ export function receiveQuestions(questions) {
     }
 }
 
-// export function addQuestion(info) {
-//     return dispatch => {
-//         return dispatch(saveQuestion(info))
-//             .then(question => console.log('success'))
-//             .catch(err => console.log(err))
-//     }
-// }
-
-
-// export function addAnswer(info) {
-//     return dispatch => {
-//         return dispatch(saveQuestionAnswer(info))
-//             .then(question => console.log('success'))
-//             .catch(err => console.log(err))
-//     }
-// }
-
-
 
 function addAnswer(answerInfo) {
+    console.log("addAnswer")
+    console.log({ answerInfo })
     return {
         type: ADD_ANSWER,
         answerInfo,
@@ -41,10 +25,11 @@ export function handleAddAnswer(answerInfo) {
     return (dispatch) => {
         // const { authedUser } = getState()
         // dispatch(showLoading())
+        dispatch(addAnswer(answerInfo))
+
 
         return saveQuestionAnswer(answerInfo)
-            .then((answerInfo) => dispatch(addAnswer(answerInfo)))
-            // .then(() => dispatch(hideLoading()))
+            .then(() => console.log('answer saved'))
             .catch(err => console.log(err))
     }
 }
@@ -61,7 +46,7 @@ function addQuestion(infoQuestion) {
 }
 
 export function handleAddQuestion(question) {
-    return (dispatch, getState) => {
+    return (dispatch) => {
         // dispatch(showLoading())
 
         return saveQuestion(question)

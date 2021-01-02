@@ -39,7 +39,13 @@ class Question extends Component {
             answer
 
         }
-        dispatch(handleAddAnswer(answerInfo))
+        console.log({ answerInfo });
+        dispatch(handleAddAnswer({
+            authedUser,
+            qid,
+            answer
+
+        }))
         // return dispatch(saveQuestionAnswer(result));
 
     };
@@ -105,11 +111,11 @@ class Question extends Component {
                                         <Fragment>
                                             <Form onSubmit={(event) => this.handleSubmit(event, authedUser, answer, question.id)}>
                                                 <div className="custom-control custom-radio">
-                                                    <input type="radio" id="customRadio1" name="customRadio" className="custom-control-input" onChange={this.handleOptionChange} value={question.optionOne.text} />
+                                                    <input type="radio" id="customRadio1" name="customRadio" className="custom-control-input" onChange={this.handleOptionChange} value="optionOne" />
                                                     <label className="custom-control-label" htmlFor="customRadio1">{question.optionOne.text}</label>
                                                 </div>
                                                 <div className="custom-control custom-radio">
-                                                    <input type="radio" id="customRadio2" name="customRadio" className="custom-control-input" onChange={this.handleOptionChange} value={question.optionTwo.text} />
+                                                    <input type="radio" id="customRadio2" name="customRadio" className="custom-control-input" onChange={this.handleOptionChange} value="optionTwo" />
                                                     <label className="custom-control-label" htmlFor="customRadio2">{question.optionTwo.text}</label>
                                                 </div>
 
