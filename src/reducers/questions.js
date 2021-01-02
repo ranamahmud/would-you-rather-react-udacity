@@ -20,14 +20,12 @@ export default function questions(state = {}, action) {
         ...action.questions
       }
     case ADD_QUESTION:
-      console.log('ADD_QUESTION reducer')
       return {
         ...state,
         [action.infoQuestion.id]: action.infoQuestion
       }
     case ADD_ANSWER:
       const { answerInfo } = action
-      console.log(action)
       return {
         ...state,
         [action.answerInfo.qid]: {

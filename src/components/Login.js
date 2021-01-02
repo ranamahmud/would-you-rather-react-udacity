@@ -22,7 +22,6 @@ class Login extends Component {
         event.preventDefault();
         const { dispatch } = this.props;
         const AUTHED_ID = this.state.value;
-        console.log({ AUTHED_ID })
         if (AUTHED_ID !== '') {
             dispatch(setAuthedUser(AUTHED_ID));
             this.props.history.push("/");

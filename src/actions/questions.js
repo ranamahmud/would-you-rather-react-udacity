@@ -13,8 +13,7 @@ export function receiveQuestions(questions) {
 
 
 function addAnswer(answerInfo) {
-    console.log("addAnswer")
-    console.log({ answerInfo })
+
     return {
         type: ADD_ANSWER,
         answerInfo,
@@ -38,7 +37,6 @@ export function handleAddAnswer(answerInfo) {
 
 
 function addQuestion(infoQuestion) {
-    console.log('ADD_QUESTION addQuestion')
     return {
         type: ADD_QUESTION,
         infoQuestion,

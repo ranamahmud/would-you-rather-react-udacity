@@ -22,11 +22,9 @@ class Question extends Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
     handleOptionChange = changeEvent => {
-        console.log(changeEvent.target.value);
         this.setState({
             answer: changeEvent.target.value
         });
-        // console.log(this.state.answer)
     };
 
     handleSubmit = (event, authedUser, answer, qid) => {
@@ -89,7 +87,7 @@ class Question extends Component {
                                             Number of Votes: {vote1}
                                         </Card.Text>
                                         <Card.Text>
-                                            Percentage of Votes: {percent1}%
+                                            Percentage of Votes: {Math.round(percent1, 2)}%
                                         </Card.Text>
                                         <Card.Text>
                                             {question.optionTwo.text}
@@ -99,7 +97,7 @@ class Question extends Component {
                                             Number of Votes: {vote2}
                                         </Card.Text>
                                         <Card.Text>
-                                            Percentage of Votes: {percent2}%
+                                            Percentage of Votes: {Math.round(percent2, 2)}%
                                         </Card.Text>
                                     </Fragment>
 

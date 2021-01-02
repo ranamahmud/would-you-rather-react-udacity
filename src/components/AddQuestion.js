@@ -21,11 +21,9 @@ class AddQuestion extends Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
     handleChange(event) {
-        // console.log(event.target.id);
         this.setState({
             [event.target.id]: event.target.value
         });
-        console.log(this.state);
 
 
     }
@@ -34,8 +32,7 @@ class AddQuestion extends Component {
         event.preventDefault();
         const { authedUser } = this.props;
         const author = authedUser;
-        console.log({ author })
-        console.log("button clicked");
+
         const { from } = this.props.location.state || { pathname: "/" };
         const { dispatch } = this.props;
         const optionOneText = this.state.optionOneText;
@@ -43,12 +40,8 @@ class AddQuestion extends Component {
         if (optionOneText !== '' && optionTwoText !== ''
             && author !== undefined
         ) {
-            console.log("inside");
-            console.log({ optionOneText, optionTwoText, author })
-            // dispatch(saveQuestion({ optionOneText, optionTwoText, author }));
+
             dispatch(handleAddQuestion({ optionOneText, optionTwoText, author }));
-            // saveQuestion(question)
-            // this.props.history.push(from);
         }
 
         this.setState({

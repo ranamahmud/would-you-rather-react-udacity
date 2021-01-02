@@ -21,8 +21,7 @@ class Leaderboard extends Component {
 
         }
         const usersSorted = Object.values(users).sort((a, b) => b.score - a.score);
-        console.log({ usersSorted })
-        // 
+
         return (
             <Container className="text-center">
                 <h1>Leaderboard</h1>
