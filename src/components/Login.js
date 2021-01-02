@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Button, Container, Form } from 'react-bootstrap';
 import { connect } from 'react-redux'
-import { Redirect, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import { setAuthedUser } from '../actions/authedUser'
 
 class Login extends Component {

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Container } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import LeaderBoardCard from './LeaderBoardCard';
 import UserBoard from './UserBoard';
 
 
@@ -28,7 +27,6 @@ class Leaderboard extends Component {
                 {
                     usersSorted.map(user => <UserBoard user={user} key={user.id} />)
                 }
-                {/* <LeaderBoardCard /> */}
             </Container>
         );
     }

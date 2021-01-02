@@ -3,7 +3,6 @@ import { Container, Form, Row, Button, Col } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { handleAddQuestion } from '../actions/questions';
-import { saveQuestion } from '../utils/api';
 
 // The form is available at / add.
 // The application shows the text “Would You Rather” and has a form for creating two options.

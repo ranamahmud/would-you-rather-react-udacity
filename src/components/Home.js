@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import { Button, Col, Container, Row } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import { Router, Switch } from 'react-router-dom';
-import Header from './Header';
-import PrivateRoute from './PrivateRoute';
 import QuestionDetail from './QuestionDetail';
 
 
